@@ -60,12 +60,12 @@ run_firmware_checks() (
         idf.py -B "${validation_build_dir}" \
         -D "SDKCONFIG=${validation_build_dir}/sdkconfig" build
     idf.py -B "${validation_build_dir}" merge-bin \
-        -o "${validation_build_dir}/FoloToy-AI-Passport-full.bin"
+        -o "${validation_build_dir}/tower-bloxx-full.bin"
     python3 tools/verify_firmware.py "${validation_build_dir}"
     mkdir -p "${repo_root}/build"
     install -m 0644 \
-        "${validation_build_dir}/FoloToy-AI-Passport-full.bin" \
-        "${repo_root}/build/FoloToy-AI-Passport-full.bin"
+        "${validation_build_dir}/tower-bloxx-full.bin" \
+        "${repo_root}/build/tower-bloxx-full.bin"
     echo "Firmware build: PASS"
 )
 

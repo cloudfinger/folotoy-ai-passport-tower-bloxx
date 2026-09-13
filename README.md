@@ -30,4 +30,4 @@ The theme option is on the title menu. These representative interface previews a
 
 The game includes an original pixel-city cover, matching gameplay backgrounds, a looping chiptune soundtrack, and distinct cues for successful drops, perfect timing, misses, and results. It opens directly into the game after a short loading screen.
 
-This repository contains the full game source and artwork, based on the [FoloToy AI Passport](https://github.com/FoloToy/ai-passport) project. For build and validation instructions, see the [engineering guide](docs/development/engineering/build-and-test.md). Generated firmware files are intentionally excluded from Git. The source repository is licensed under [MIT](LICENSE).
+This repository contains the full game source and artwork, based on the [FoloToy AI Passport](https://github.com/FoloToy/ai-passport) project. For build and validation instructions, see the [engineering guide](docs/development/engineering/build-and-test.md). A successful build creates the complete firmware at `build/tower-bloxx-full.bin`; generated firmware files are intentionally excluded from Git. The source repository is licensed under [MIT](LICENSE).

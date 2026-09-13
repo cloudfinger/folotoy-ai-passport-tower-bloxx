@@ -73,8 +73,25 @@ class ProtectedLayoutTest(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             build_dir = Path(directory)
-            (build_dir / "FoloToy-AI-Passport.bin").write_bytes(b"\xe9")
+            (build_dir / "tower-bloxx.bin").write_bytes(b"\xe9")
             VERIFY.verify_protected_layout(bytes(merged), build_dir)
+
+
+class AppIdentityTest(unittest.TestCase):
+    def test_accepts_tower_bloxx_project_name(self) -> None:
+        app = bytearray(b"\xff" * 0x80)
+        struct.pack_into("<I", app, 0x20, 0xABCD5432)
+        app[0x50:0x70] = b"\0" * 32
+        app[0x50 : 0x50 + len(b"tower-bloxx")] = b"tower-bloxx"
+        VERIFY.verify_app_identity(bytes(app))
+
+    def test_rejects_baseline_project_name(self) -> None:
+        app = bytearray(b"\xff" * 0x80)
+        struct.pack_into("<I", app, 0x20, 0xABCD5432)
+        app[0x50:0x70] = b"\0" * 32
+        app[0x50 : 0x50 + len(b"FoloToy-AI-Passport")] = b"FoloToy-AI-Passport"
+        with self.assertRaisesRegex(ValueError, "tower-bloxx"):
+            VERIFY.verify_app_identity(bytes(app))
 
 
 if __name__ == "__main__":

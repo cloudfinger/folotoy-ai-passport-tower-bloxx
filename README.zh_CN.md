@@ -30,4 +30,4 @@
 
 游戏使用原创像素城市封面、与之呼应的游玩背景、循环芯片音乐，以及成功放楼、Perfect、失误和结算时的不同音效。开机经过简短加载画面后，会直接进入游戏。
 
-本仓库包含完整游戏源代码和美术素材，基于 [FoloToy AI Passport](https://github.com/FoloToy/ai-passport) 项目开发。构建与校验方法见[工程指南](docs/development/engineering/build-and-test.zh_CN.md)。生成的固件文件不会纳入 Git。源代码仓库采用 [MIT 许可证](LICENSE)。
+本仓库包含完整游戏源代码和美术素材，基于 [FoloToy AI Passport](https://github.com/FoloToy/ai-passport) 项目开发。构建与校验方法见[工程指南](docs/development/engineering/build-and-test.zh_CN.md)。构建成功后，完整固件位于 `build/tower-bloxx-full.bin`；生成的固件文件不会纳入 Git。源代码仓库采用 [MIT 许可证](LICENSE)。

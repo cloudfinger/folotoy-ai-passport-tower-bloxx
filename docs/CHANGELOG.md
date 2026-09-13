@@ -6,6 +6,8 @@
 
 ## Unreleased
 
+- Renamed the firmware project and complete BIN to `tower-bloxx`, including its embedded ESP-IDF application descriptor, CI artifacts, and build verification, so firmware readers show the game name.
+
 - Added a selectable daylight theme alongside the original dusk theme, including matching cover and gameplay art, floor and city colors, text contrast, and a persistent setting on the title menu.
 
 - Added an original looping chiptune soundtrack and short cues for navigation, floor drops, landings, perfect timing, misses, wins, losses, and city placement. Audio streams from a dedicated worker so button input and stacking animation stay responsive.

@@ -13,8 +13,14 @@ from pathlib import Path
 EXPECTED_IMAGES = (
     (0x0000, "bootloader/bootloader.bin"),
     (0x8000, "partition_table/partition-table.bin"),
-    (0x10000, "FoloToy-AI-Passport.bin"),
+    (0x10000, "tower-bloxx.bin"),
 )
+
+APP_DESC_MAGIC = 0xABCD5432
+APP_DESC_MAGIC_OFFSET = 0x20
+APP_PROJECT_NAME_OFFSET = 0x50
+APP_PROJECT_NAME_SIZE = 32
+EXPECTED_PROJECT_NAME = "tower-bloxx"
 
 FLASH_SIZE = 8 * 1024 * 1024
 PARTITION_TABLE_OFFSET = 0x8000
@@ -70,6 +76,23 @@ def parse_partition_table(raw: bytes) -> tuple[list[Partition], bool]:
     return partitions, found_md5
 
 
+def verify_app_identity(app: bytes) -> None:
+    """Check the ESP-IDF app descriptor name shown by firmware readers."""
+    end = APP_PROJECT_NAME_OFFSET + APP_PROJECT_NAME_SIZE
+    if len(app) < end:
+        raise ValueError("application image is too short for its app descriptor")
+    magic = struct.unpack_from("<I", app, APP_DESC_MAGIC_OFFSET)[0]
+    if magic != APP_DESC_MAGIC:
+        raise ValueError("application has no valid ESP-IDF app descriptor")
+    raw_name = app[APP_PROJECT_NAME_OFFSET:end].split(b"\0", 1)[0]
+    name = raw_name.decode("ascii", "strict")
+    if name != EXPECTED_PROJECT_NAME:
+        raise ValueError(
+            f"firmware project name must be {EXPECTED_PROJECT_NAME!r}, got {name!r}"
+        )
+    print(f"Firmware project name: PASS ({name})")
+
+
 def verify_protected_layout(merged: bytes, build_dir: Path) -> None:
     """Enforce the protected partition and merged-artifact layout."""
     table = merged[
@@ -96,7 +119,7 @@ def verify_protected_layout(merged: bytes, build_dir: Path) -> None:
         if item.label != "cardid" and item.offset < CARDID_OFFSET + CARDID_SIZE and CARDID_OFFSET < item.end:
             raise ValueError(f"partition {item.label!r} overlaps protected cardid")
 
-    app_path = build_dir / "FoloToy-AI-Passport.bin"
+    app_path = build_dir / "tower-bloxx.bin"
     app_size = app_path.stat().st_size
     if app_size > APP_MAX_SIZE:
         raise ValueError(f"application is {app_size} bytes; limit is {APP_MAX_SIZE}")
@@ -117,7 +140,7 @@ def verify_protected_layout(merged: bytes, build_dir: Path) -> None:
 
 def main() -> int:
     build_dir = Path(sys.argv[1] if len(sys.argv) > 1 else "build").resolve()
-    merged_path = build_dir / "FoloToy-AI-Passport-full.bin"
+    merged_path = build_dir / "tower-bloxx-full.bin"
     flash_args_path = build_dir / "flash_args"
 
     if not merged_path.is_file() or not flash_args_path.is_file():
@@ -140,6 +163,12 @@ def main() -> int:
             print(f"ERROR: {relative_name} differs at merged offset 0x{offset:x}", file=sys.stderr)
             return 1
         print(f"Verified {relative_name}: {len(image)} bytes at 0x{offset:x}")
+
+    try:
+        verify_app_identity((build_dir / "tower-bloxx.bin").read_bytes())
+    except (OSError, UnicodeDecodeError, ValueError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 1
 
     if len(merged) > FLASH_SIZE:
         print("ERROR: merged firmware exceeds 8 MB", file=sys.stderr)

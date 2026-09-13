@@ -13,7 +13,7 @@ Derivative projects must preserve all of the following:
 
 - ESP32-C3, 8 MB Flash, ESP-IDF 5.5.3.
 - A merged ESP image starting at `0x0`, produced as
-  `build/FoloToy-AI-Passport-full.bin`.
+  `build/tower-bloxx-full.bin`.
 - One main application image at `0x10000`, no larger than `0x300000` bytes.
 - `cardid`: data/NVS at `0x356000`, size `0x4000`.
 - A valid partition-table MD5 marker and no partition overlap with the
@@ -38,8 +38,8 @@ MD5 and the protected `cardid` range, enforces the 3 MB application limit, and
 rejects device-specific identity bytes. CI runs the same gate. Do not publish
 an artifact when this command fails.
 
-Upload only `build/FoloToy-AI-Passport-full.bin`; the similarly named app-only
-`build/FoloToy-AI-Passport.bin` does not contain the complete validated layout.
+Upload only `build/tower-bloxx-full.bin`; the similarly named app-only
+`build/tower-bloxx.bin` does not contain the complete validated layout.
 
 ## Flashing safety during development
 
