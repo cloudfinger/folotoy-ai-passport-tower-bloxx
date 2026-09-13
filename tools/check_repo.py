@@ -16,8 +16,19 @@ MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 CJK_RE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff]")
 SECRET_PATTERNS = {
     "GitHub token": re.compile(r"(?:ghp_|github_pat_)[A-Za-z0-9_]{20,}"),
+    "FoloToy authorization code": re.compile(r"fapc_[A-Za-z0-9_-]{20,}"),
+    "API key": re.compile(r"(?:sk-(?:proj-)?|glpat-)[A-Za-z0-9_-]{20,}"),
     "AWS access key": re.compile(r"AKIA[0-9A-Z]{16}"),
     "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    "credential in URL": re.compile(r"https?://[^\s/@]+:[^\s/@]+@[^\s/]+"),
+}
+SENSITIVE_FILE_NAMES = {
+    ".DS_Store", ".env", ".netrc", ".npmrc", ".pypirc",
+    "ai-passport-publisher.json", "id_rsa", "id_ed25519",
+}
+SENSITIVE_FILE_SUFFIXES = {
+    ".pem", ".p12", ".pfx", ".key", ".sqlite", ".sqlite3",
+    ".db", ".log", ".bak",
 }
 ROOT_MARKDOWN_ALLOWLIST = {
     "AGENTS.md",
@@ -84,6 +95,14 @@ def check_required_files(errors: list[str]) -> None:
             errors.append(
                 f"{path.name}: root Markdown must move to docs/ or .github/"
             )
+
+
+def check_sensitive_paths(errors: list[str]) -> None:
+    for path in git_files():
+        name = path.name
+        if (name in SENSITIVE_FILE_NAMES or name.startswith(".env.") or
+                path.suffix.lower() in SENSITIVE_FILE_SUFFIXES):
+            errors.append(f"{path.relative_to(ROOT)}: sensitive local file must not be committed")
 
 
 def check_markdown_links(files: list[Path], errors: list[str]) -> None:
@@ -197,6 +216,7 @@ def main() -> int:
     errors: list[str] = []
     files = text_files()
     check_required_files(errors)
+    check_sensitive_paths(errors)
     check_markdown_links(files, errors)
     check_document_languages(files, errors)
     check_action_pins(errors)
