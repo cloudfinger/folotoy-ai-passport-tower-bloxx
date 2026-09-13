@@ -8,6 +8,17 @@
 
 ![Tower Bloxx 深色封面](assets/images/tower-cover-240x320.png)
 
+## 游戏画面
+
+主题选项位于标题菜单。以下界面预览根据当前游戏布局与美术素材重绘，用于展示玩法；它们不是实机照片或从设备截取的画面。
+
+| 画面 | 黄昏主题 | 日光主题 |
+| --- | --- | --- |
+| 标题与主题设置 | ![黄昏标题菜单，选中深色主题](assets/images/readme/tower-menu-dark.png) | ![日光标题菜单，选中浅色主题](assets/images/readme/tower-menu-light.png) |
+| 叠楼玩法 | ![黄昏快速游戏，叠起三层方形楼层](assets/images/readme/tower-gameplay-dark.png) | ![日光快速游戏，显示 Perfect 判定](assets/images/readme/tower-gameplay-light.png) |
+| 建造城市 | ![黄昏城市地图，已有完成的大楼](assets/images/readme/tower-city-dark.png) | ![日光城市地图，准备放置大楼](assets/images/readme/tower-city-light.png) |
+| 结算画面 | ![黄昏 Game Over 画面](assets/images/readme/tower-result-dark.png) | ![日光 Tower Built 结算画面](assets/images/readme/tower-result-light.png) |
+
 ## 玩法
 
 - **Quick Game（快速游戏）：** 不断叠楼，挑战更高分数。

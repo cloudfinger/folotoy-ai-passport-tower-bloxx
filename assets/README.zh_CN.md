@@ -34,6 +34,12 @@ Tower Bloxx 的暗色封面与游戏背景源图分别为 `images/tower-cover-so
 它们由 `main/CMakeLists.txt` 嵌入 Flash，LVGL 直接读取，无需分配整屏 RAM。
 来源：2026-09-13 使用 OpenAI 图像生成工具为本项目创作；日光版基于原图编辑，未使用第三方游戏美术。
 
+`images/readme/tower-*.png` 中的八张 240 × 320 界面预览，根据上述素材、
+`main/demo_tower.c` 的菜单与画面布局，以及 `main/tower_theme.c` 的配色重绘。
+它们是示意性的 UI 预览，不是设备截图。安装 Pillow 后运行
+`python3 tools/render_tower_readme_previews.py` 可重新生成。这些图片只用于
+仓库根目录的项目 README，不会嵌入固件。
+
 ## 音乐与音效（music）
 
 可复用的音乐与音效源码放在 `music/`。

@@ -8,6 +8,17 @@ Build a skyline one floor at a time. A square floor swings across the screen; pr
 
 ![Tower Bloxx dark cover](assets/images/tower-cover-240x320.png)
 
+## See the game
+
+The theme option is on the title menu. These representative interface previews are recreated from the current game layout and artwork; they are not photographs or captures of a physical device.
+
+| Screen | Dusk theme | Daylight theme |
+| --- | --- | --- |
+| Title and theme setting | ![Dusk title menu with Theme: Dark selected](assets/images/readme/tower-menu-dark.png) | ![Daylight title menu with Theme: Light selected](assets/images/readme/tower-menu-light.png) |
+| Stacking a tower | ![Dusk Quick Game with three square floors stacked](assets/images/readme/tower-gameplay-dark.png) | ![Daylight Quick Game showing Perfect timing](assets/images/readme/tower-gameplay-light.png) |
+| Building the city | ![Dusk city map with a completed tower](assets/images/readme/tower-city-dark.png) | ![Daylight city map with a tower ready to place](assets/images/readme/tower-city-light.png) |
+| The result | ![Dusk Game Over screen](assets/images/readme/tower-result-dark.png) | ![Daylight Tower Built result screen](assets/images/readme/tower-result-light.png) |
+
 ## Play
 
 - **Quick Game:** Keep stacking and chase a higher score.

@@ -40,6 +40,13 @@ Source: created for this project with OpenAI image generation on 2026-09-13;
 the light variants were edited from the original art. No third-party game
 artwork was used.
 
+The eight 240 × 320 `images/readme/tower-*.png` interface previews are
+recreated from those assets, the menu and screen geometry in
+`main/demo_tower.c`, and the colors in `main/tower_theme.c`. They are
+illustrative UI previews, not device captures. Regenerate them with Pillow
+using `python3 tools/render_tower_readme_previews.py`. They are used only in
+the root project READMEs and are not embedded in the firmware.
+
 ## Music and sound effects
 
 Store reusable music and sound-effect sources in `music/`.
