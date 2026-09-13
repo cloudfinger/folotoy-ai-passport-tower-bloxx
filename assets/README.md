@@ -26,6 +26,20 @@ Store reusable source images and generated display assets in `images/`.
 - Preserve editable sources where licensing permits, and record the source and license.
 - Never commit device QR secrets, credentials, or personal data in images.
 
+The Tower Bloxx dark cover and gameplay backdrop live in
+`images/tower-cover-source.png` and `images/tower-backdrop-source.png`.
+Their daylight companions are `images/tower-cover-light-source.png` and
+`images/tower-backdrop-light-source.png`. All four are 1086 × 1448 generated
+artwork. Run `python3 tools/convert_tower_cover.py` with Pillow to create the
+four `*-240x320.png` RGB565 screen previews and the four 153,600-byte
+little-endian RGB565 assets in `main/` (`tower_cover.rgb565`,
+`tower_backdrop.rgb565`, `tower_cover_light.rgb565`, and
+`tower_backdrop_light.rgb565`). They are embedded in Flash by
+`main/CMakeLists.txt`; LVGL reads them without a full-screen RAM allocation.
+Source: created for this project with OpenAI image generation on 2026-09-13;
+the light variants were edited from the original art. No third-party game
+artwork was used.
+
 ## Music and sound effects
 
 Store reusable music and sound-effect sources in `music/`.

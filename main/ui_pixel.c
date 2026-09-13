@@ -25,14 +25,6 @@ lv_obj_t *ui_pixel_label(lv_obj_t *parent, const char *text,
     return label;
 }
 
-static void add_cloud(lv_obj_t *parent, int x, int y)
-{
-    block(parent, x + 1, y + 7, 43, 10, UI_INK);
-    block(parent, x + 5, y + 4, 35, 10, 0xFFFFFF);
-    block(parent, x + 12, y, 10, 9, 0xFFFFFF);
-    block(parent, x + 27, y + 1, 9, 8, 0xFFFFFF);
-}
-
 lv_obj_t *ui_pixel_screen_create(const char *title)
 {
     lv_obj_t *scr = lv_obj_create(NULL);
@@ -41,30 +33,39 @@ lv_obj_t *ui_pixel_screen_create(const char *title)
     lv_obj_set_style_border_width(scr, 0, 0);
     lv_obj_set_style_pad_all(scr, 0, 0);
 
-    add_cloud(scr, 188, 8);
-    block(scr, 0, 286, 240, 34, UI_GRASS);
-    block(scr, 0, 286, 240, 4, 0xA7D93E);
-    for (int x = 0; x < 240; x += 30) {
-        block(scr, x, 312, 18, 8, UI_GRASS_DARK);
-        block(scr, x + 18, 316, 12, 4, 0x75452E);
-    }
+    // A low silhouette and construction stripe replace the original sky/grass.
+    block(scr, 0, 279, 34, 7, UI_MUTED);
+    block(scr, 34, 271, 34, 15, UI_MUTED);
+    block(scr, 68, 276, 27, 10, UI_MUTED);
+    block(scr, 95, 269, 31, 17, UI_MUTED);
+    block(scr, 126, 278, 37, 8, UI_MUTED);
+    block(scr, 163, 273, 34, 13, UI_MUTED);
+    block(scr, 197, 279, 43, 7, UI_MUTED);
+    block(scr, 0, 286, 240, 34, UI_FOOTER);
+    block(scr, 0, 286, 240, 4, UI_ORANGE);
+    for (int x = 4; x < 240; x += 30)
+        block(scr, x, 286, 13, 4, UI_YELLOW);
 
-    block(scr, 9, 12, 151, 33, UI_INK);
-    lv_obj_t *plate = block(scr, 5, 8, 151, 33, UI_PAPER);
+    block(scr, 10, 12, 151, 33, UI_INK);
+    lv_obj_t *plate = block(scr, 5, 8, 151, 33, UI_YELLOW);
     lv_obj_set_style_border_color(plate, lv_color_hex(UI_INK), 0);
-    lv_obj_set_style_border_width(plate, 3, 0);
+    lv_obj_set_style_border_width(plate, 2, 0);
     lv_obj_t *heading = ui_pixel_label(plate, title, &lv_font_montserrat_20, UI_INK);
     lv_obj_center(heading);
+    // Small sunset mark balances the heading without occupying battery space.
+    block(scr, 195, 11, 27, 27, UI_INK);
+    block(scr, 198, 14, 21, 21, UI_ORANGE);
+    block(scr, 203, 19, 11, 11, UI_YELLOW);
     return scr;
 }
 
 lv_obj_t *ui_pixel_panel_create(lv_obj_t *parent, int x, int y, int w, int h,
                                 uint32_t color)
 {
-    block(parent, x + 5, y + 6, w, h, UI_INK);
+    block(parent, x + 4, y + 5, w, h, UI_GRASS_DARK);
     lv_obj_t *panel = block(parent, x, y, w, h, color);
     lv_obj_set_style_border_color(panel, lv_color_hex(UI_INK), 0);
-    lv_obj_set_style_border_width(panel, 4, 0);
+    lv_obj_set_style_border_width(panel, 3, 0);
     lv_obj_set_style_pad_all(panel, 7, 0);
     return panel;
 }
@@ -79,22 +80,19 @@ lv_obj_t *ui_pixel_mascot_create(lv_obj_t *parent, int x, int y)
     lv_obj_set_style_border_width(m, 0, 0);
     lv_obj_set_style_pad_all(m, 0, 0);
 
-    /* 原创“小电视机器人”：天线、发光屏幕脸、橙色围巾与履带脚。 */
-    block(m, 18, 0, 3, 6, UI_INK);
-    block(m, 16, 0, 7, 3, UI_ORANGE);
-    block(m, 3, 6, 32, 24, UI_INK);
-    block(m, 0, 12, 5, 10, 0x7557D9);
-    block(m, 33, 12, 5, 10, 0x7557D9);
-    block(m, 7, 10, 24, 16, 0xB9F3FF);
-    lv_obj_t *left_eye = block(m, 11, 14, 4, 6, 0x294B7A);
-    lv_obj_t *right_eye = block(m, 23, 14, 4, 6, 0x294B7A);
-    block(m, 16, 22, 7, 2, 0x7557D9);
-    block(m, 10, 29, 18, 4, UI_ORANGE);
-    block(m, 8, 33, 22, 11, 0x7557D9);
-    block(m, 3, 35, 5, 7, 0xB9F3FF);
-    block(m, 30, 35, 5, 7, 0xB9F3FF);
-    block(m, 8, 44, 9, 4, UI_INK);
-    block(m, 21, 44, 9, 4, UI_INK);
+    // Tiny site foreman: hardhat, face, jacket, and two animated eyes.
+    block(m, 7, 5, 24, 7, UI_YELLOW);
+    block(m, 3, 11, 32, 5, UI_INK);
+    block(m, 5, 12, 28, 3, UI_YELLOW);
+    block(m, 5, 16, 28, 16, UI_INK);
+    block(m, 8, 18, 22, 11, UI_PAPER);
+    lv_obj_t *left_eye = block(m, 12, 21, 3, 5, UI_INK);
+    lv_obj_t *right_eye = block(m, 23, 21, 3, 5, UI_INK);
+    block(m, 10, 32, 18, 3, UI_YELLOW);
+    block(m, 6, 35, 26, 10, UI_RED);
+    block(m, 18, 35, 3, 10, UI_YELLOW);
+    block(m, 5, 45, 11, 3, UI_INK);
+    block(m, 22, 45, 11, 3, UI_INK);
     start_blink(left_eye);
     start_blink(right_eye);
     return m;
@@ -143,8 +141,8 @@ void ui_pixel_mascot_jump(lv_obj_t *mascot)
 
 void ui_pixel_set_selected(lv_obj_t *panel, bool selected, bool enabled)
 {
-    uint32_t color = !enabled ? 0x78909C : (selected ? UI_YELLOW : UI_PAPER);
+    uint32_t color = !enabled ? UI_MUTED : (selected ? UI_YELLOW : UI_PAPER);
     lv_obj_set_style_bg_color(panel, lv_color_hex(color), 0);
     lv_obj_set_style_border_color(panel,
-        lv_color_hex(selected ? 0xFFFFFF : UI_INK), 0);
+        lv_color_hex(selected ? UI_RED : UI_INK), 0);
 }

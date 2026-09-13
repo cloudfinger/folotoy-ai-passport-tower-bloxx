@@ -6,6 +6,17 @@
 
 ## Unreleased
 
+- Added a selectable daylight theme alongside the original dusk theme, including matching cover and gameplay art, floor and city colors, text contrast, and a persistent setting on the title menu.
+
+- Added an original looping chiptune soundtrack and short cues for navigation, floor drops, landings, perfect timing, misses, wins, losses, and city placement. Audio streams from a dedicated worker so button input and stacking animation stay responsive.
+- Made the gameplay cues longer and more prominent, with distinct rising/falling phrases and a brief smooth reduction of the BGM while an important cue plays.
+
+- Added a matching sunset-city backdrop to the active stacking and city-map screens. The gameplay art keeps the middle calm for the moving square floors, while title and results retain the original cover illustration.
+
+- Turned the Tower Bloxx branch into a standalone game: boot now opens an original pixel-city cover with a short loading bar, then the illustrated City Mode/Quick Game title screen. Holding OK returns to the game title. The former hardware-demo launcher and unused demo services are no longer included in this firmware image.
+
+- Added Tower Bloxx as an offline, three-button game on the 240x320 Passport display, with timing-based floor stacking, quick play, city placement, host-tested gameplay rules, and screen transitions that fit the LVGL memory pool. Its floors now have square 4x4-window facades, and the firmware screens share a warm pixel-city palette with brick, amber, parchment, and a dark construction footer.
+
 - Added the supplied 80-byte CW2017 profile for the specified 520 mAh cell, including content/update-flag checks, verified writes, the required restart sequence, and bounded SOC-readiness polling.
 
 - Expanded the environment bootstrap document: added Espressif's Git service mirror (`git.espressif.com.cn`) as the preferred mainland-China route for ESP-IDF v5.5.3 and its submodules, documented submodule long-wait/timeout handling, in-place repair, and the pinned-commit shallow fetch for large submodules such as `esp32-wifi-lib`, warned about stale per-repository Jihulab `insteadOf` residue, and added the official offline release archive as a last-resort fallback (learned from `esp-mosaico/esp-mosaico-vibe`).

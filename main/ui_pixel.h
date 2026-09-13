@@ -2,16 +2,19 @@
 
 #include "lvgl.h"
 
-#define UI_SKY        0x1689E8
-#define UI_SKY_DARK   0x0872C9
-#define UI_INK        0x17202A
-#define UI_PAPER      0xF4F4EA
-#define UI_GRASS      0x82BE2D
-#define UI_GRASS_DARK 0x55951D
-#define UI_YELLOW     0xFFD928
-#define UI_ORANGE     0xFFB23E
-#define UI_RED        0xE43B2F
-#define UI_MUTED      0xD9E7EC
+// Warm pixel-city palette shared by the menu and every firmware page.
+#define UI_SKY        0xF2DFC5  // parchment backdrop
+#define UI_SKY_DARK   0x78484A  // secondary copy
+#define UI_INK        0x30262C
+#define UI_PAPER      0xFFF1DB
+#define UI_GRASS      0xD98560  // terracotta surfaces
+#define UI_GRASS_DARK 0x88434A
+#define UI_YELLOW     0xF0BD5B
+#define UI_ORANGE     0xD97D4D
+#define UI_RED        0xB34448
+#define UI_MUTED      0xD5C2AD
+#define UI_FOOTER     0x423039
+#define UI_LIGHT      0xFFF1DB
 
 lv_obj_t *ui_pixel_screen_create(const char *title);
 lv_obj_t *ui_pixel_panel_create(lv_obj_t *parent, int x, int y, int w, int h,

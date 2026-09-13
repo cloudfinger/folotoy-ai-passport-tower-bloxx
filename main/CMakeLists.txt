@@ -2,14 +2,14 @@ idf_component_register(
     SRCS "main.c"
          "ui_pixel.c"
          "ui_pixel_math.c"
-         "demo_display.c"
-         "demo_button.c"
-         "demo_audio.c"
-         "demo_battery.c"
-         "demo_radio.c"
-         "demo_wifi.c"
-         "demo_ble.c"
-         "demo_low_power.c"
+         "demo_tower.c"
+         "tower_model.c"
+         "tower_sound.c"
+         "tower_audio.c"
+         "tower_theme.c"
+         "tower_theme_store.c"
     INCLUDE_DIRS "."
-    REQUIRES bsp bt esp_event esp_hw_support esp_netif esp_timer esp_wifi nvs_flash
+    EMBED_FILES "tower_cover.rgb565" "tower_backdrop.rgb565"
+                "tower_cover_light.rgb565" "tower_backdrop_light.rgb565"
+    REQUIRES bsp esp_timer nvs_flash
 )

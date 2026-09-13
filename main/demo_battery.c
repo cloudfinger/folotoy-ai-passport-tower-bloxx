@@ -21,7 +21,7 @@ static void tick(lv_timer_t *t) {
 
     // 低电量变红,便于一眼判断
     lv_obj_set_style_text_color(s_soc,
-        (soc >= 0 && soc < 20) ? lv_color_hex(0xFF5A5A) : lv_color_hex(0x39FF88), 0);
+        lv_color_hex((soc >= 0 && soc < 20) ? UI_RED : UI_GRASS_DARK), 0);
 }
 
 void demo_battery_enter(void) {

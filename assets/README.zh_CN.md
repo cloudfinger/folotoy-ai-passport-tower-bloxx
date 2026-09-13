@@ -24,6 +24,16 @@
 - 许可允许时保留可编辑源文件，并记录来源与许可。
 - 图片中不得包含设备二维码秘密、凭证或个人数据。
 
+Tower Bloxx 的暗色封面与游戏背景源图分别为 `images/tower-cover-source.png` 和
+`images/tower-backdrop-source.png`；对应的日光版为
+`images/tower-cover-light-source.png` 和 `images/tower-backdrop-light-source.png`。
+四张生成图均为 1086 × 1448。安装 Pillow 后运行
+`python3 tools/convert_tower_cover.py`，生成四张 `*-240x320.png` RGB565 屏幕预览，
+以及 `main/` 下四个各 153,600 字节的小端 RGB565 资产（`tower_cover.rgb565`、
+`tower_backdrop.rgb565`、`tower_cover_light.rgb565`、`tower_backdrop_light.rgb565`）。
+它们由 `main/CMakeLists.txt` 嵌入 Flash，LVGL 直接读取，无需分配整屏 RAM。
+来源：2026-09-13 使用 OpenAI 图像生成工具为本项目创作；日光版基于原图编辑，未使用第三方游戏美术。
+
 ## 音乐与音效（music）
 
 可复用的音乐与音效源码放在 `music/`。
